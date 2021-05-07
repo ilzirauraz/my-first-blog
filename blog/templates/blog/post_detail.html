@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="post">
+        {% if post.published_date %}
+            <div>
+                {{post.published_date}}
+            </div>
+        {% else %}
+            <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+        {% endif %}
+        <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        {% comment %} {% if user.is_authenticated %} {% endcomment %}
+            <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk%}"><span class="glyphicon glyphicon-pencil"></span></a>
+        {% comment %} {% endif %} {% endcomment %}
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text|linebreaksbr  }}</p>
+    </div>
+{% endblock %}
